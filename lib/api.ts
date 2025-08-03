@@ -30,8 +30,8 @@ export const fetchNotes = async (page: number, query: string): Promise<FetchNote
   return response.data;
 };
 
-export const fetchNoteById = async (noteId: string): Promise<Note> => {
-  const res = await axios.get<Note>(`/notes/${noteId}`, {
+export const fetchNoteById = async (id: string): Promise<Note> => {
+  const res = await axios.get<Note>(`/notes/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
