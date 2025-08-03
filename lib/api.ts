@@ -1,12 +1,12 @@
 import axios from 'axios';
-import type { NewNote, Note } from '../type/note';
+import type { NewNote, Note } from '../types/note';
 
 interface FetchNoteList {
   notes: Note[];
   totalPages: number;
 }
 
-axios.defaults.baseURL = "https://notehub-public.goit.study/api"
+axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 
 const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
@@ -50,14 +50,11 @@ export const createNote = async (noteData: NewNote): Promise<Note> => {
 };
 
 export const deleteNote = async (noteId: string): Promise<Note> => {
-  const response = await axios.delete<Note>(
-    `/notes/${noteId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await axios.delete<Note>(`/notes/${noteId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return response.data;
 };

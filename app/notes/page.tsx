@@ -56,11 +56,9 @@ function App() {
             Create note +
           </button>
         </header>
-
         {isLoading && <p className={css.loading}>loading notes...</p>}
         {isError && <p className={css.error}>Server error. Sorry!</p>}
         {data && !isLoading && <NoteList notes={data.notes} />}
-
         {isModalOpen && (
           <Modal onClose={() => closeModal()}>
             <NoteForm onCloseModal={closeModal} />
