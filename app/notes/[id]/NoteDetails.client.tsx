@@ -24,7 +24,7 @@ const NoteDetailsClient = () => {
         </div>
         <p className={css.content}>{note?.content}</p>
         <p className={css.date}>{note?.createdAt}</p>
-        createdAt
+    
       </div>
     </div>
   );
