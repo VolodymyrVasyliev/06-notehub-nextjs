@@ -9,7 +9,7 @@ type Props = {
 
 const NoteDetails = async ({ params }: Props) => {
   const { noteId } = await params;
-  console.log(noteId);
+  console.log('noteId', noteId);
   
 
   const queryClient = new QueryClient();
