@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { NewNote, Note, DetalilsNote } from '../type/note';
+import type { NewNote, Note } from '../type/note';
 
 interface FetchNoteList {
   notes: Note[];
@@ -30,8 +30,8 @@ export const fetchNotes = async (page: number, query: string): Promise<FetchNote
   return response.data;
 };
 
-export const fetchNoteById = async (id: string) => {
-  const res = await axios.get<DetalilsNote>(`/notes/${id}`, {
+export const fetchNoteById = async (noteId: string): Promise<Note> => {
+  const res = await axios.get<Note>(`/notes/${noteId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
