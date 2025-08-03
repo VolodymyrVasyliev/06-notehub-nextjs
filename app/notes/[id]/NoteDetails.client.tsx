@@ -8,21 +8,23 @@ import { useQuery } from '@tanstack/react-query';
 const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
 
-  const noteId = id as string;
-
-  const { data: note,isLoading, error } = useQuery({
-    queryKey: ['notes', noteId],
-    queryFn: () => fetchNoteById(noteId),
+  const {
+    data: note,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['notes', id],
+    queryFn: () => fetchNoteById(id),
     refetchOnMount: false,
   });
     
     if (isLoading) {
-      return <p>Loading, please wait...</p>;
-    }
+    return <p>Loading, please wait...</p>;
+  }
 
-    if (error || !note) {
-      return <p>Something went wrong.</p>;
-    }
+  if (error || !note) {
+    return <p>Something went wrong.</p>;
+  }
 
   return (
     <div className={css.container}>
