@@ -1,10 +1,7 @@
 import axios from 'axios';
-import type { NewNote, Note } from '../types/note';
+import type { NewNote, Note, FetchNoteList } from '../types/note';
 
-interface FetchNoteList {
-  notes: Note[];
-  totalPages: number;
-}
+
 
 axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 

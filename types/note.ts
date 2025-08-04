@@ -22,3 +22,8 @@ export interface NewNote {
 //   content: string;
 //   tag: NoteTag;
 // }
+
+export interface FetchNoteList {
+  notes: Note[];
+  totalPages: number;
+}

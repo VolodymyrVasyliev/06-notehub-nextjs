@@ -10,17 +10,17 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import Modal from '../../components/Modal/Modal';
 import NoteForm from '../../components/NoteForm/NoteForm';
 import Pagination from '../../components/Pagination/Pagination';
+import { FetchNoteList } from '@/types/note';
 
 type NotesClientProps = {
-  initialPage: number;
-  initialQuery: string;
+  initialData: FetchNoteList;
 };
 
-export default function NotesClient({ initialPage, initialQuery }: NotesClientProps) {
+export default function NotesClient({ initialData }: NotesClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const [inputValue, setInputValue] = useState(initialQuery);
-  const [debouncedValue, setDebouncedValue] = useState(initialQuery);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [inputValue, setInputValue] = useState('');
+  const [debouncedValue, setDebouncedValue] = useState('');
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setDebouncedValue(value);
@@ -30,12 +30,14 @@ export default function NotesClient({ initialPage, initialQuery }: NotesClientPr
   const handleSearchChange = (value: string) => {
     setInputValue(value);
     debouncedSearch(value);
+    
   };
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['notes', currentPage, debouncedValue],
     queryFn: () => fetchNotes(currentPage, debouncedValue),
     placeholderData: keepPreviousData,
+    initialData
   });
 
   const totalPages = data?.totalPages ?? 0;
@@ -70,7 +72,6 @@ export default function NotesClient({ initialPage, initialQuery }: NotesClientPr
     </div>
   );
 }
-
 
 // 'use client';
 
