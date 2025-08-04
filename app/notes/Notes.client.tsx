@@ -30,14 +30,13 @@ export default function NotesClient({ initialData }: NotesClientProps) {
   const handleSearchChange = (value: string) => {
     setInputValue(value);
     debouncedSearch(value);
-    
   };
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['notes', currentPage, debouncedValue],
     queryFn: () => fetchNotes(currentPage, debouncedValue),
     placeholderData: keepPreviousData,
-    initialData
+    initialData,
   });
 
   const totalPages = data?.totalPages ?? 0;
@@ -47,14 +46,6 @@ export default function NotesClient({ initialData }: NotesClientProps) {
       <header className={css.toolbar}>
         <SearchBox value={inputValue} onSearch={handleSearchChange} />
 
-        {totalPages > 1 && (
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalPages={totalPages}
-          />
-        )}
-
         <button className={css.button} onClick={() => setIsModalOpen(true)}>
           Create note +
         </button>
@@ -63,6 +54,13 @@ export default function NotesClient({ initialData }: NotesClientProps) {
       {isLoading && <p className={css.loading}>loading notes...</p>}
       {isError && <p className={css.error}>Server error. Sorry!</p>}
       {data && !isLoading && <NoteList notes={data.notes} />}
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={totalPages}
+        />
+      )}
 
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
