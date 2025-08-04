@@ -12,7 +12,7 @@ const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
 export const fetchNotes = async (page: number, query: string): Promise<FetchNoteList> => {
   const params: Record<string, string | number> = {
-    perPage: 10,
+    perPage: 12,
     page,
   };
 

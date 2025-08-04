@@ -13,14 +13,14 @@ import Pagination from '../../components/Pagination/Pagination';
 
 type NotesClientProps = {
   initialPage: number;
-  initialSearch: string;
+  initialQuery: string;
 };
 
-export default function NotesClient({ initialPage, initialSearch }: NotesClientProps) {
+export default function NotesClient({ initialPage, initialQuery }: NotesClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [inputValue, setInputValue] = useState(initialSearch);
-  const [debouncedValue, setDebouncedValue] = useState(initialSearch);
+  const [inputValue, setInputValue] = useState(initialQuery);
+  const [debouncedValue, setDebouncedValue] = useState(initialQuery);
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setDebouncedValue(value);
